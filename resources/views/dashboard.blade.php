@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Retur</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total RETUR SAAT INI</p>
                                     </br>
                                     <h5 class="font-weight-bolder">
                                       20
