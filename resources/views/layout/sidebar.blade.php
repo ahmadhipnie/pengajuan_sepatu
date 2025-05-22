@@ -31,16 +31,14 @@
                 aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html "
                 target="_blank">
-                <img src="../assets/img/logo-ct-dark.png" width="26px" height="26px" class="navbar-brand-img h-100"
-                    alt="main_logo">
-                <span class="ms-1 font-weight-bold">Admin Perpustakaan</span>
+                <span class="ms-1 font-weight-bold">Production Monitoring System</span>
             </a>
         </div>
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="">
+                    <a class="nav-link active" href="{{ route('dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
@@ -49,29 +47,40 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="">
+                    <a class="nav-link " href="{{ route('daily_pengajuan.index') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">PO</span>
+                        <span class="nav-link-text ms-1">Daily Output</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Lainnya</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="">
-                        <div
-                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">logout</span>
-                    </a>
-                </li>
+                @if (Auth::user())
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('po.index') }}">
+                            <div
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Input Data</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Lainnya</h6>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ route('logout') }}">
+                            <div
+                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">logout</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
-       
+
     </aside>
     <main class="main-content position-relative border-radius-lg ">
         <!-- Navbar -->
@@ -80,7 +89,8 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="">@yield('pages', 'Pages')</a></li>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
+                                href="">@yield('pages', 'Pages')</a></li>
                         <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('title', 'Title')</li>
                     </ol>
                     <h6 class="font-weight-bolder text-white mb-0">@yield('title', 'Title')</h6>
@@ -91,10 +101,17 @@
                     </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">selamat datang admin</span>
-                            </a>
+                            @if (Auth::check())
+                                <a href="#" class="nav-link text-white font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1"></i>
+                                    <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
+                                </a>
+                            @else
+                                <a href="{{ route('login') }}" class="nav-link text-white font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1"></i>
+                                    <span class="d-sm-inline d-none">Login</span>
+                                </a>
+                            @endif
                         </li>
 
                     </ul>
@@ -172,10 +189,10 @@
                             onclick="darkMode(this)">
                     </div>
                 </div>
-                
-                </div>
+
             </div>
         </div>
+    </div>
     </div>
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>

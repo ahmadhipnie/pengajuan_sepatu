@@ -2,13 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DailyPengajuan;
+use App\Models\Kurang;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $totalKurang = Kurang::sum('total');
+        $totalDailyPengajuan = DailyPengajuan::count();
+
+        return view('dashboard', compact('totalKurang', 'totalDailyPengajuan'));
     }
 
+    public function kurangTable()
+    {
+        $data = \App\Models\Kurang::with(['dailyPengajuan.po'])->get();
+        return view('kurang.table', compact('data'));
+    }
 }
