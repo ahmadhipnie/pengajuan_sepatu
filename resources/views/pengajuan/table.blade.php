@@ -20,8 +20,8 @@
                                 <th>Wide</th>
                                 <th>Size Order Checklist</th>
                                 <th>Size Order Daily</th>
-                                <th>Kurang</th>
-                                <th>TLM</th>
+                                <th>Balance</th>
+                                <th>MLT</th>
                             </tr>
                         </thead>
                         <tbody>
