@@ -18,6 +18,7 @@
                                 <th>Cell</th>
                                 <th>No PO</th>
                                 <th>Wide</th>
+                                <th>Size Order Checklist</th>
                                 <th>Size Order Daily</th>
                                 <th>Kurang</th>
                                 <th>TLM</th>
@@ -32,6 +33,13 @@
                                     <td>{{ $item->cell }}</td>
                                     <td>{{ $item->po->no_po ?? '-' }}</td>
                                     <td>{{ $item->po->wide ?? '-' }}</td>
+                                    <td>
+                                        <ul class="mb-0">
+                                            @foreach ($item->po->sizeOrderPos as $sod)
+                                                <li>{{ $sod->size }} : {{ $sod->total }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
                                     <td>
                                         <ul class="mb-0">
                                             @foreach ($item->sizeOrderDailies as $sod)
