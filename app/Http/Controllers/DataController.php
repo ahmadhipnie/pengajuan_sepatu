@@ -66,7 +66,7 @@ class DataController extends Controller
                 ]);
             }
         });
-
+        Alert::success('Success', 'PO berhasil ditambahkan');
         return redirect()->route('po.index')->with('success', 'PO berhasil ditambahkan');
     }
 
@@ -120,7 +120,7 @@ class DataController extends Controller
                 ]);
             }
         });
-
+        Alert::success('Success', 'PO berhasil diupdate');
         return redirect()->route('po.index')->with('success', 'PO berhasil diupdate');
     }
 

@@ -10,6 +10,7 @@
                 <h5>Detail Daily Pengajuan</h5>
                 <p><strong>Tanggal Mulai:</strong> {{ $pengajuan->tanggal_mulai }}</p>
                 <p><strong>Tanggal Selesai:</strong> {{ $pengajuan->tanggal_selesai }}</p>
+                <p><strong>Cell:</strong> {{ $pengajuan->cell }}</p>
                 <p><strong>Colour Way:</strong> {{ $pengajuan->po->colour_way ?? '-' }}</p>
                 <p><strong>Style:</strong> {{ $pengajuan->po->style ?? '-' }}</p>
                 <p><strong>Market:</strong> {{ $pengajuan->po->market ?? '-' }}</p>
@@ -48,9 +49,9 @@
                             <tr>
                                 <th>Size</th>
                                 <th>Total</th>
-                                <th>
+                                {{-- <th>
                                     <button type="button" class="btn btn-success btn-sm" id="addRow">+</button>
-                                </th>
+                                </th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -60,7 +61,7 @@
                                             value="{{ $kurang->size }}" required></td>
                                     <td><input type="number" name="total[]" class="form-control"
                                             value="{{ $kurang->total }}" required></td>
-                                    <td><button type="button" class="btn btn-danger btn-sm removeRow">-</button></td>
+                                    {{-- <td><button type="button" class="btn btn-danger btn-sm removeRow">-</button></td> --}}
                                 </tr>
                             @empty
                                 <tr>

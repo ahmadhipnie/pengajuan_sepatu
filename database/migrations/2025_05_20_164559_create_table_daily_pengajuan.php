@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
+            $table->string('cell');
             $table->unsignedBigInteger('id_po');
             $table->foreign('id_po')->references('id')->on('po')->onDelete('cascade');
             $table->timestamps();

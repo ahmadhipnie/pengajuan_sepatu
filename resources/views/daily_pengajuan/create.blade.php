@@ -89,6 +89,10 @@
                             <label>Tanggal Selesai</label>
                             <input type="date" name="tanggal_selesai" class="form-control" required>
                         </div>
+                        <div class="mb-12">
+                            <label>Cell</label>
+                            <input type="text" name="cell" class="form-control" required>
+                        </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="{{ route('daily_pengajuan.index') }}" class="btn btn-secondary">Kembali</a>
                     </form>

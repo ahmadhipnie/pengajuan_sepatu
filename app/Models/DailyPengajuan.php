@@ -14,6 +14,7 @@ class DailyPengajuan extends Model
     protected $fillable = [
         'tanggal_mulai',
         'tanggal_selesai',
+        'cell',
         'id_po',
     ];
 

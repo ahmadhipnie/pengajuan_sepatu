@@ -7,6 +7,7 @@ use App\Models\Kurang;
 use App\Models\SizeOrderDaily;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DailyPengajuanController extends Controller
 {
@@ -69,19 +70,57 @@ class DailyPengajuanController extends Controller
     {
         $pengajuan = DailyPengajuan::findOrFail($id);
 
-        // Hapus semua kurang lama, insert ulang
-        Kurang::where('id_daily_pengajuan', $id)->delete();
+        $errors = [];
         if ($request->size && $request->total) {
             foreach ($request->size as $i => $size) {
-                if ($size && $request->total[$i]) {
-                    Kurang::create([
+                $inputKurang = (int) $request->total[$i];
+                // Cari data kurang yang sesuai
+                $kurang = Kurang::where('id_daily_pengajuan', $id)->where('size', $size)->first();
+
+                if (!$kurang) {
+                    $errors[] = "Data kurang untuk size $size tidak ditemukan!";
+                    continue;
+                }
+
+                if ($inputKurang > $kurang->total) {
+                    $errors[] = "Input kurang untuk size $size tidak boleh lebih dari {$kurang->total}!";
+                    continue;
+                }
+
+                // Tambahkan ke SizeOrderDaily
+                $sizeOrderDaily = \App\Models\SizeOrderDaily::where('id_daily_pengajuan', $id)
+                    ->where('size', $size)
+                    ->first();
+
+                if ($sizeOrderDaily) {
+                    $sizeOrderDaily->total += $inputKurang;
+                    $sizeOrderDaily->save();
+                } else {
+                    // Jika belum ada, buat baru
+                    \App\Models\SizeOrderDaily::create([
                         'size' => $size,
-                        'total' => $request->total[$i],
+                        'total' => $inputKurang,
                         'id_daily_pengajuan' => $id,
                     ]);
                 }
+
+                // Kurangi dari tabel kurang
+                $sisa = $kurang->total - $inputKurang;
+
+                if ($sisa == 0) {
+                    $kurang->delete();
+                } else {
+                    $kurang->update(['total' => $sisa]);
+                }
             }
         }
+
+        if (count($errors) > 0) {
+            Alert::error('Error', 'Ada kesalahan dalam input data kurang:');
+            return back()->withInput()->with('swal_error', implode("\n", $errors));
+        }
+
+        Alert::success('Success', 'Data kurang berhasil diupdate');
         return redirect()->route('daily_pengajuan.show', $id)->with('success', 'Data kurang berhasil diupdate');
     }
 
@@ -108,6 +147,7 @@ class DailyPengajuanController extends Controller
             'wide' => 'required',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
+            'cell' => 'required',
             'size.*' => 'required',
             'total.*' => 'required|integer',
         ]);
@@ -120,18 +160,52 @@ class DailyPengajuanController extends Controller
             return back()->withInput()->withErrors(['no_po' => 'PO tidak ditemukan!']);
         }
 
+        // Validasi: total sizeorderdaily tidak boleh lebih dari sizeorderpo
+        $sizeOrderPo = $po->sizeOrderPos()->get()->keyBy('size');
+        foreach ($request->size as $i => $size) {
+            $inputTotal = (int)$request->total[$i];
+            $poTotal = isset($sizeOrderPo[$size]) ? (int)$sizeOrderPo[$size]->total : null;
+            if ($poTotal === null) {
+                Alert::error('Error', "Size $size tidak ditemukan pada PO!");
+                return back()->withInput()->withErrors(['size' => "Size $size tidak ditemukan pada PO!"]);
+            }
+            if ($inputTotal > $poTotal) {
+                Alert::error('Error', "Total untuk size $size tidak boleh lebih dari $poTotal!");
+                return back()->withInput()->withErrors(['total' => "Total untuk size $size tidak boleh lebih dari $poTotal!"]);
+            }
+        }
+
         DB::transaction(function () use ($request, $po) {
             $daily = \App\Models\DailyPengajuan::create([
                 'tanggal_mulai' => $request->tanggal_mulai,
                 'tanggal_selesai' => $request->tanggal_selesai,
+                'cell' => $request->cell,
                 'id_po' => $po->id,
             ]);
+
+            // Simpan SizeOrderDaily
             foreach ($request->size as $i => $size) {
                 \App\Models\SizeOrderDaily::create([
                     'size' => $size,
                     'total' => $request->total[$i],
                     'id_daily_pengajuan' => $daily->id,
                 ]);
+            }
+
+            // Cek selisih dan simpan ke tabel kurang jika perlu
+            $sizeOrderPo = $po->sizeOrderPos()->get();
+            foreach ($sizeOrderPo as $poSize) {
+                // Cari total pada sizeOrderDaily untuk size ini
+                $inputIndex = collect($request->size)->search($poSize->size);
+                $dailyTotal = $inputIndex !== false ? (int)$request->total[$inputIndex] : 0;
+                if ($dailyTotal < $poSize->total) {
+                    $selisih = $poSize->total - $dailyTotal;
+                    \App\Models\Kurang::create([
+                        'size' => $poSize->size,
+                        'total' => $selisih,
+                        'id_daily_pengajuan' => $daily->id,
+                    ]);
+                }
             }
         });
 
