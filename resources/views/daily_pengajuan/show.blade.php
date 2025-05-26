@@ -10,6 +10,11 @@
                 <h5>Detail Daily Pengajuan</h5>
                 <p><strong>Tanggal Mulai:</strong> {{ $pengajuan->tanggal_mulai }}</p>
                 <p><strong>Tanggal Selesai:</strong> {{ $pengajuan->tanggal_selesai }}</p>
+                <p>
+                    <strong>Jumlah Hari:</strong>
+                    {{ \Carbon\Carbon::parse($pengajuan->tanggal_mulai)->diffInDays(\Carbon\Carbon::parse($pengajuan->tanggal_selesai)) + 1 }}
+                    hari
+                </p>
                 <p><strong>Cell:</strong> {{ $pengajuan->cell }}</p>
                 <p><strong>Colour Way:</strong> {{ $pengajuan->po->colour_way ?? '-' }}</p>
                 <p><strong>Style:</strong> {{ $pengajuan->po->style ?? '-' }}</p>
@@ -57,8 +62,8 @@
                         <tbody>
                             @forelse($pengajuan->kurangs as $kurang)
                                 <tr>
-                                    <td><input type="text" name="size[]" class="form-control"
-                                            value="{{ $kurang->size }}" required></td>
+                                    <td><input type="text" name="size[]" class="form-control" value="{{ $kurang->size }}"
+                                            required></td>
                                     <td><input type="number" name="total[]" class="form-control"
                                             value="{{ $kurang->total }}" required></td>
                                     {{-- <td><button type="button" class="btn btn-danger btn-sm removeRow">-</button></td> --}}
