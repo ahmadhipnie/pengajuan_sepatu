@@ -21,4 +21,9 @@ class Kurang extends Model
     {
         return $this->belongsTo(DailyPengajuan::class, 'id_daily_pengajuan');
     }
+
+    public function kurangs()
+    {
+        return $this->hasMany(\App\Models\Kurang::class, 'id_daily_pengajuan');
+    }
 }

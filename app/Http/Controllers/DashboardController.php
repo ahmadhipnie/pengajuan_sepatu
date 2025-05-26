@@ -21,4 +21,10 @@ class DashboardController extends Controller
         $data = \App\Models\Kurang::with(['dailyPengajuan.po'])->get();
         return view('kurang.table', compact('data'));
     }
+
+    public function table()
+    {
+        $data = \App\Models\DailyPengajuan::with(['po', 'sizeOrderDailies'])->get();
+        return view('pengajuan.table', compact('data'));
+    }
 }
