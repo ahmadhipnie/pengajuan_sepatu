@@ -15,6 +15,9 @@ class DailyPengajuan extends Model
         'tanggal_mulai',
         'tanggal_selesai',
         'cell',
+        'bagian',
+        'bm',
+        'xfd',
         'id_po',
     ];
 

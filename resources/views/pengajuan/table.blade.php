@@ -16,6 +16,9 @@
                                 <th>Tanggal Mulai</th>
                                 <th>Tanggal Selesai</th>
                                 <th>Cell</th>
+                                <th>Bagian</th>
+                                <th>XFD</th>
+                                <th>BM</th>
                                 <th>No PO</th>
                                 <th>Wide</th>
                                 <th>Size Order Checklist</th>
@@ -31,6 +34,9 @@
                                     <td>{{ $item->tanggal_mulai }}</td>
                                     <td>{{ $item->tanggal_selesai }}</td>
                                     <td>{{ $item->cell }}</td>
+                                    <td>{{ $item->bagian }}</td>
+                                    <td>{{ $item->xfd }}</td>
+                                    <td>{{ $item->bm }}</td>
                                     <td>{{ $item->po->no_po ?? '-' }}</td>
                                     <td>{{ $item->po->wide ?? '-' }}</td>
                                     <td>

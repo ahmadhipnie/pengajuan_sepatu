@@ -40,6 +40,18 @@
                     <label>Cell</label>
                     <input type="text" name="cell" class="form-control" value="{{ $pengajuan->cell }}" readonly>
                 </div>
+                <div class="mb-3">
+                    <label>Bagian</label>
+                    <input type="text" name="bagian" class="form-control" value="{{ $pengajuan->bagian }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label>XFD</label>
+                    <input type="date" name="xfd" class="form-control" value="{{ $pengajuan->xfd }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label>BM</label>
+                    <input type="date" name="bm" class="form-control" value="{{ $pengajuan->bm }}" readonly>
+                </div>
                 <hr>
                 <h6>Edit Size Order Daily</h6>
                 <table class="table" id="sizeOrderTable">

@@ -148,6 +148,9 @@ class DailyPengajuanController extends Controller
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
             'cell' => 'required',
+            'bagian' => 'required',
+            'xfd' => 'required|date',
+            'bm' => 'required|date',
             'size.*' => 'required',
             'total.*' => 'required|integer',
         ]);
@@ -180,6 +183,9 @@ class DailyPengajuanController extends Controller
                 'tanggal_mulai' => $request->tanggal_mulai,
                 'tanggal_selesai' => $request->tanggal_selesai,
                 'cell' => $request->cell,
+                'bagian' => $request->bagian,
+                'bm' => $request->bm,
+                'xfd' => $request->xfd,
                 'id_po' => $po->id,
             ]);
 

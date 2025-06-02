@@ -21,6 +21,10 @@
                                 <th>Colour Way</th>
                                 <th>Style</th>
                                 <th>Size Run</th>
+                                <th>Cell</th>
+                                <th>Bagian</th>
+                                <th>XFD</th>
+                                <th>BM</th>
                                 <th>Tanggal Mulai</th>
                                 <th>Tanggal Selesai</th>
                             </tr>
@@ -36,6 +40,10 @@
                                     <td>{{ $item->dailyPengajuan->po->colour_way ?? '-' }}</td>
                                     <td>{{ $item->dailyPengajuan->po->style ?? '-' }}</td>
                                     <td>{{ $item->dailyPengajuan->po->size_run ?? '-' }}</td>
+                                    <td>{{ $item->dailyPengajuan->cell ?? '-' }}</td>
+                                    <td>{{ $item->dailyPengajuan->bagian ?? '-' }}</td>
+                                    <td>{{ $item->dailyPengajuan->xfd ?? '-' }}</td>
+                                    <td>{{ $item->dailyPengajuan->bm ?? '-' }}</td>
                                     <td>{{ $item->dailyPengajuan->tanggal_mulai ?? '-' }}</td>
                                     <td>{{ $item->dailyPengajuan->tanggal_selesai ?? '-' }}</td>
                                 </tr>

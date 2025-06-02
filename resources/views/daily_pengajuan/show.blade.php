@@ -16,6 +16,9 @@
                     hari
                 </p>
                 <p><strong>Cell:</strong> {{ $pengajuan->cell }}</p>
+                <p><strong>bagian:</strong> {{ $pengajuan->bagian }}</p>
+                <p><strong>xfd:</strong> {{ $pengajuan->xfd }}</p>
+                <p><strong>bm:</strong> {{ $pengajuan->bm }}</p>
                 <p><strong>Colour Way:</strong> {{ $pengajuan->po->colour_way ?? '-' }}</p>
                 <p><strong>Style:</strong> {{ $pengajuan->po->style ?? '-' }}</p>
                 <p><strong>Market:</strong> {{ $pengajuan->po->market ?? '-' }}</p>

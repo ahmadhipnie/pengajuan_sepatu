@@ -13,7 +13,21 @@ class DashboardController extends Controller
         $totalKurang = Kurang::sum('total');
         $totalDailyPengajuan = DailyPengajuan::count();
 
-        return view('dashboard', compact('totalKurang', 'totalDailyPengajuan'));
+        // Hitung total per bagian
+        $bagianList = [
+            'assembly',
+            'cutting',
+            'sewing',
+            'stokfitting',
+            'incoming bottom',
+            'treatment'
+        ];
+        $bagianCounts = [];
+        foreach ($bagianList as $bagian) {
+            $bagianCounts[$bagian] = DailyPengajuan::where('bagian', $bagian)->count();
+        }
+
+        return view('dashboard', compact('totalKurang', 'totalDailyPengajuan', 'bagianCounts'));
     }
 
     public function kurangTable()
