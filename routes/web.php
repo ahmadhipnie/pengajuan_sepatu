@@ -44,3 +44,4 @@ Route::post('/daily-pengajuan', [DailyPengajuanController::class, 'store'])->nam
 
 Route::get('/kurang', [DashboardController::class, 'kurangTable'])->name('kurang.table');
 Route::get('/pengajuan', [DashboardController::class, 'table'])->name('pengajuan.table');
+Route::get('/detail_assembly', [DashboardController::class, 'assembly'])->name('detail_assembly');

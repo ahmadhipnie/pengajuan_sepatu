@@ -63,7 +63,7 @@
 
             {{-- Card Assembly --}}
             <div class="col-xl-3 col-sm-6 mb-4">
-                <a href="" style="text-decoration:none;">
+                <a href="{{ route('detail_assembly') }}" style="text-decoration:none;">
                     <div class="card">
                         <div class="card-body p-3">
                             <div class="row">
