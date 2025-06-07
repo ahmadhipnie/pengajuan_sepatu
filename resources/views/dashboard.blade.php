@@ -89,7 +89,7 @@
 
             {{-- Card Cutting --}}
             <div class="col-xl-3 col-sm-6 mb-4">
-                <a href="" style="text-decoration:none;">
+                <a href="{{ route('detail_cutting') }}" style="text-decoration:none;">
                     <div class="card">
                         <div class="card-body p-3">
                             <div class="row">
@@ -116,7 +116,7 @@
 
             {{-- Card Sewing --}}
             <div class="col-xl-3 col-sm-6 mb-4">
-                <a href="" style="text-decoration:none;">
+                <a href="{{ route('detail_sewing') }}" style="text-decoration:none;">
                     <div class="card">
                         <div class="card-body p-3">
                             <div class="row">
@@ -143,7 +143,7 @@
 
             {{-- Card Stokfitting --}}
             <div class="col-xl-3 col-sm-6 mb-4">
-                <a href="" style="text-decoration:none;">
+                <a href="{{ route('detail_stokfitting') }}" style="text-decoration:none;">
                     <div class="card">
                         <div class="card-body p-3">
                             <div class="row">
@@ -170,7 +170,7 @@
 
             {{-- Card Incoming Bottom --}}
             <div class="col-xl-3 col-sm-6 mb-4">
-                <a href="" style="text-decoration:none;">
+                <a href="{{ route('detail_incoming_bottom') }}" style="text-decoration:none;">
                     <div class="card">
                         <div class="card-body p-3">
                             <div class="row">
@@ -197,7 +197,7 @@
 
             {{-- Card Treatment --}}
             <div class="col-xl-3 col-sm-6 mb-4">
-                <a href="" style="text-decoration:none;">
+                <a href="{{ route('detail_treatment') }}" style="text-decoration:none;">
                     <div class="card">
                         <div class="card-body p-3">
                             <div class="row">

@@ -44,4 +44,10 @@ Route::post('/daily-pengajuan', [DailyPengajuanController::class, 'store'])->nam
 
 Route::get('/kurang', [DashboardController::class, 'kurangTable'])->name('kurang.table');
 Route::get('/pengajuan', [DashboardController::class, 'table'])->name('pengajuan.table');
+
 Route::get('/detail_assembly', [DashboardController::class, 'assembly'])->name('detail_assembly');
+Route::get('/detail_treatment', [DashboardController::class, 'treatment'])->name('detail_treatment');
+Route::get('/detail_cutting', [DashboardController::class, 'cutting'])->name('detail_cutting');
+Route::get('/detail_sewing', [DashboardController::class, 'sewing'])->name('detail_sewing');
+Route::get('/detail_stokfitting', [DashboardController::class, 'stokfitting'])->name('detail_stokfitting');
+Route::get('/detail_incoming_bottom', [DashboardController::class, 'incoming_bottom'])->name('detail_incoming_bottom');
