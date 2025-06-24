@@ -25,6 +25,7 @@
                                 <th>Size Order Daily</th>
                                 <th>Balance</th>
                                 <th>MLT</th>
+                                <th>updated at</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,6 +69,7 @@
                                         {{ \Carbon\Carbon::parse($item->tanggal_mulai)->diffInDays(\Carbon\Carbon::parse($item->tanggal_selesai)) + 1 }}
                                         hari
                                     </td>
+                                    <td>{{ $item->updated_at ? $item->updated_at->format('H:i:s') : '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

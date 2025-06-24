@@ -30,6 +30,7 @@
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
                             <th>No PO</th>
+                            <th>Updated at</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                                 <td>{{ $item->tanggal_mulai }}</td>
                                 <td>{{ $item->tanggal_selesai }}</td>
                                 <td>{{ $item->po->no_po ?? '-' }}</td>
+                                <td>{{ $item->updated_at ? $item->updated_at->format('H:i:s') : '-' }}</td>
                                 <td>
                                     <a href="{{ route('daily_pengajuan.show', $item->id) }}"
                                         class="btn btn-info btn-sm">Detail</a>

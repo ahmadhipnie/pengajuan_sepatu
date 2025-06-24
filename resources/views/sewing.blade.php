@@ -25,6 +25,7 @@
                                 <th>Size Order Daily</th>
                                 <th>Balance</th>
                                 <th>MLT</th>
+                                <th>updated at</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,25 +43,25 @@
                                     <td>
                                         <ul class="mb-0">
                                             @foreach ($item->po->sizeOrderPos as $sod)
-                                                <li>{{ $sod->size }} : {{ $sod->total }}</li>
+                                            <li>{{ $sod->size }} : {{ $sod->total }}</li>
                                             @endforeach
                                         </ul>
                                     </td>
                                     <td>
                                         <ul class="mb-0">
                                             @foreach ($item->sizeOrderDailies as $sod)
-                                                <li>{{ $sod->size }} : {{ $sod->total }}</li>
+                                            <li>{{ $sod->size }} : {{ $sod->total }}</li>
                                             @endforeach
                                         </ul>
                                     </td>
                                     <td>
                                         <ul class="mb-0">
                                             @if ($item->kurangs->isEmpty())
-                                                <li>Semua Terchecklist✅</li>
+                                            <li>Semua Terchecklist✅</li>
                                             @else
-                                                @foreach ($item->kurangs as $kurang)
-                                                    <li>{{ $kurang->size }} : {{ $kurang->total }}</li>
-                                                @endforeach
+                                            @foreach ($item->kurangs as $kurang)
+                                            <li>{{ $kurang->size }} : {{ $kurang->total }}</li>
+                                            @endforeach
                                             @endif
                                         </ul>
                                     </td>
@@ -68,6 +69,8 @@
                                         {{ \Carbon\Carbon::parse($item->tanggal_mulai)->diffInDays(\Carbon\Carbon::parse($item->tanggal_selesai)) + 1 }}
                                         hari
                                     </td>
+                                    <td>{{ $item->updated_at ? $item->updated_at->format('H:i:s') : '-' }}</td>
+
                                 </tr>
                             @endforeach
                         </tbody>

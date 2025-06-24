@@ -37,6 +37,7 @@
                                 <th>Market</th>
                                 <th>Qty Original</th>
                                 <th>Size Order</th>
+                                <th>Updated at</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -50,6 +51,7 @@
                                     <td>{{ $item->colour_way }}</td>
                                     <td>{{ $item->style }}</td>
                                     <td>{{ $item->market }}</td>
+                                    <td>{{ $item->updated_at ? $item->updated_at->format('H:i:s') : '-' }}</td>
                                     <td>{{ $item->qty_original }}</td>
                                     <td>
                                         <ul>
